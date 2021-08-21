@@ -2,10 +2,11 @@ import pymysql
 
 
 class Database:
-    def __init__(self, host, user, password, database):
+    def __init__(self, host, port, user, password, database):
 
         self.con = pymysql.connect(
             host=host,
+            port=port,
             user=user,
             password=password,
             db=database,
