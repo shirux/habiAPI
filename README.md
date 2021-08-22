@@ -134,4 +134,24 @@ http://127.0.0.1:8000
 
 ## Dudas
 
+**En el requerimiento se habla de un filtro (state) pero en la base de datos no está habilitado. ¿Qué debo hacer en este caso?**
+El servidor entiende el filtro y es capaz de procesarlo. Sin embargo cuando se arma la consulta y se procesa la información a un dict, este pedazo de codigo se encuentra documentado para no generar errores en la transacción
+
+**En el requerimiento se habla de poder manejar las excepciones. ¿Qué debo hacer para esto?**
+Con el diseño propuesto para el endpoint habilitado se manejan los escenarios de error, los cuales son:
+- Perdida de conexión a la base de datos
+- Mala estructuración en la query
+- El modelo no corresponde con la respuesta al usuario que define el negocio
+
+En cualquier escenario el servidor responde con un 500, pues no entiende el request o pierde conexión y le envia al FrontEnd con este status.
+Las validaciones, ya sea en la estructura y ejecución de la query o con los datos del resultado se manejan en las clases entities y serializers respectivamente.
+Estas excepciones todas son levantadas (raise) y llegan hasta la vista, la cual se encarga de generar una respuesta generica en caso de error.
+Finalmente, el serializer entiende que algunos campos en la respuesta pueden ser nulos o pueden retornar un string vacio. Todo esto se maneja en los campos definidos en el mismo serializer.
+
+**¿Puedo modificar la base de datos para el primer requerimiento?**
+En el documento entregado dice que **NO**
+
+**Para el segundo requerimiento que es conceptual, ¿Puedo usar el ORM para poder realizar el desarrollo?**
+Haciendo el analisis en la base de datos, se puede ver que se usan librerias y migraciones generadas por Django para el manejo de usuarios y la autenticación de estos.
+Teniendo en cuenta esto, se asume que utilizan las librerias de rest-framework-jwt y se plantea el desarrollo con esto en mente.
 
