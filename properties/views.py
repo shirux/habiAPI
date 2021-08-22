@@ -1,4 +1,4 @@
-from property.entities import EntityProperty
+from properties.entities import PropertyEntity
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
@@ -6,7 +6,7 @@ from standards.responses import StandardResponse
 from utils.request_utils import RequestUtils
 
 # Create your views here.
-class ApiProperty(APIView):
+class PropertiesApi(APIView):
     permission_classes = (permissions.AllowAny,)
     response = StandardResponse
 
@@ -32,7 +32,7 @@ class ApiProperty(APIView):
         # Retrieve params and fetch data from database
         try:
             RequestUtils.process_params(request=request, params=params)
-            properties = EntityProperty.get_list(city=params['city'], state=params['state'], min_year=params['min_year'], max_year=params['max_year'])
+            properties = PropertyEntity.get_list(city=params['city'], state=params['state'], min_year=params['min_year'], max_year=params['max_year'])
             return self.response.send_200(data=properties)
 
         # Send 500 Internal Server Error

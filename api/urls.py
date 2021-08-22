@@ -10,6 +10,6 @@ def error404(request, path=""):
 
 urlpatterns = [
     url(r"^$", error404),
-    path("api/property", include("property.urls")),
+    path("api/properties", include("properties.urls")),
     url(r"^(?P<path>.*)/$", error404),
 ]

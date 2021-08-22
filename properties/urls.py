@@ -1,9 +1,9 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
-from property import views
+from properties import views
 
 urlpatterns = [
-    url(r"^$", views.ApiProperty.as_view(), name="property detail")
+    url(r"^$", views.PropertiesApi.as_view(), name="properties")
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
