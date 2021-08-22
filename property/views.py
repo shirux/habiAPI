@@ -1,11 +1,9 @@
-import re
-
 from property.entities import EntityProperty
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
-from rest_framework import status
 from standards.responses import StandardResponse
+from utils.request_utils import RequestUtils
 
 # Create your views here.
 class ApiProperty(APIView):
@@ -31,34 +29,14 @@ class ApiProperty(APIView):
             "max_year": 0
         }
 
+        # Retrieve params and fetch data from database
         try:
-            self.get_params(request=request, params=params)
+            RequestUtils.process_params(request=request, params=params)
             properties = EntityProperty.get_list(city=params['city'], state=params['state'], min_year=params['min_year'], max_year=params['max_year'])
             return self.response.send_200(data=properties)
 
-        except Exception as e:
-            print(e)
+        # Send 500 Internal Server Error
+        except Exception:
             return self.response.send_500()
 
-    def get_params(self, request, params):
-        """Process all query params on request
-
-        Args:
-            request (HttpRequest): Request
-            params (dict): params to process
-        """
-        for key in params.items():
-            if request.GET.get(key[0]):
-                # Normalize params
-                value = request.GET[key[0]].strip()
-                value = re.sub(" +", " ", value)
-
-                # If key is year, convert to integer
-                if key[0] == 'min_year' or key[0] == 'max_year':
-                    try:
-                        value = int(value)
-                    except ValueError:
-                        value = 0
-                
-                # Update value if exists
-                params[key[0]] = value
+    
