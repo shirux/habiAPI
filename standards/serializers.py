@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.fields import SkipField
 
 
-class NoNullSerializer(serializers.ModelSerializer):
+class NoNullSerializer(serializers.Serializer):
     def to_representation(self, instance):
         """
         Remove nulls from serializers.

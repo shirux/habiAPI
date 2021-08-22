@@ -9,6 +9,7 @@ config.json
 *.log
 *.pot
 *.pyc
+*.py[cod]
 __pycache__/
 local_settings.py
 db.sqlite3

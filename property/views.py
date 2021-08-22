@@ -30,7 +30,7 @@ class ApiProperty(APIView):
 
         try:
             self.get_params(request=request, params=params)
-            response = EntityProperty.get_list()
+            response = EntityProperty.get_list(city=params['city'], state=params['state'], min_year=params['min_year'], max_year=params['max_year'])
             return Response(response, status=status.HTTP_200_OK)
 
         except Exception as e:
