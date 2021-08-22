@@ -27,7 +27,7 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
-    "property"
+    "properties"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS

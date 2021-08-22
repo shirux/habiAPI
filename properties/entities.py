@@ -1,6 +1,6 @@
 from utils.mysql_utils import Database
 from django.conf import settings
-from property.serializers import PropertySerializer
+from properties.serializers import PropertySerializer
 
 database = Database(
     host=settings.DATABASES['default']['HOST'],
@@ -10,7 +10,7 @@ database = Database(
     database=settings.DATABASES['default']['NAME']
 )
 
-class EntityProperty:
+class PropertyEntity:
 
     @staticmethod
     def get_list(city='', state='', min_year=0, max_year=0):
@@ -34,7 +34,7 @@ class EntityProperty:
         
         try:
             query = """
-                SELECT C.address, C.city, C.price, C.year, C.description from status_history A
+                SELECT C.address, C.city, C.price, C.description from status_history A
                 JOIN status B ON B.id = A.status_id
                 JOIN property C ON C.id = A.property_id
                 WHERE (A.property_id, A.update_date) IN (select  property_id, max(update_date) AS update_date from status_history GROUP BY property_id)
