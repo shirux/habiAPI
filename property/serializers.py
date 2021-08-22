@@ -2,7 +2,7 @@ from standards.serializers import NoNullSerializer
 from rest_framework import serializers
 
 class PropertySerializer(NoNullSerializer):
-   """Your data serializer, define your fields here."""
+   """Serializer representing the property model"""
    address = serializers.CharField(trim_whitespace=True)
    city = serializers.CharField(trim_whitespace=True)
    # state = serializers.CharField(trim_whitespace=True)

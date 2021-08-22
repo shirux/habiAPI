@@ -4,21 +4,24 @@ from property.entities import EntityProperty
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
-from django.http import JsonResponse
 from rest_framework import status
+from standards.responses import StandardResponse
 
 # Create your views here.
 class ApiProperty(APIView):
     permission_classes = (permissions.AllowAny,)
+    response = StandardResponse
 
     def get(self, request):
-        """[summary]
+        """GET endpoint
+        Retrieve a list of properties given some filters via query params
+        valid query params: [city, state, min_year, max_year]
 
         Args:
-            request ([type]): [description]
+            request (HttpRequest): Request sent by user|FrontEnd
 
         Returns:
-            [type]: [description]
+            HttpResponse: List of properties 
         """
 
         params = {
@@ -30,19 +33,19 @@ class ApiProperty(APIView):
 
         try:
             self.get_params(request=request, params=params)
-            response = EntityProperty.get_list(city=params['city'], state=params['state'], min_year=params['min_year'], max_year=params['max_year'])
-            return Response(response, status=status.HTTP_200_OK)
+            properties = EntityProperty.get_list(city=params['city'], state=params['state'], min_year=params['min_year'], max_year=params['max_year'])
+            return self.response.send_200(data=properties)
 
         except Exception as e:
             print(e)
-            return Response({"error": "error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return self.response.send_500()
 
     def get_params(self, request, params):
-        """[summary]
+        """Process all query params on request
 
         Args:
-            request ([type]): [description]
-            params ([type]): [description]
+            request (HttpRequest): Request
+            params (dict): params to process
         """
         for key in params.items():
             if request.GET.get(key[0]):
