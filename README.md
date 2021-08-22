@@ -46,12 +46,25 @@ GET /api/properties?city=Bogota&max_year=2010
 GET /api/properties?city=Bogota&state=Bogota&min_year=2000&max_year=2010
 ```
 
-Si un usuario aplica un filtro invalido a los ya mencionados, el back ignora este query param y responde correctamente. Un ejemplo
+Si un usuario aplica un filtro invalido a los ya mencionados, el back ignora este query param y responde correctamente. Un ejemplo:
 ```
 GET /api/properties?city_name=Bogota
 GET /api/properties?invalid_filter=True
 ```
 
+Dentro del codigo se puede encontrar un aplicativo (Properties), que es la encargada de manejar cualquier transacción referente a una propiedad.
+En esta app encuentra los archivos basicos generados por Django (admin, apps, models, tests, urls, views) y algunos archivos adicionales agregados para el correcto funcionamiento del endpoint (entities, serializers).
+
+Se explica la responsabilidad de cada archivo en la solución propuesta (Cabe resaltar que todos los endpoints funcionarian asi):
+- **entities:** Clase encargada de realizar las consultas|queries hacia la Base de datos. Se dejan en un archivo separado, pues varias consultas se pueden reutilizar en diferentes endpoints, ya sea para dar una respuesta fija o usar la data para realizar otro tipo de operaciones
+- **models:** Representación del modelo en el ORM de Django (Para esta prueba no se usa)
+- **serializers:** Clase encargada de convertir los QuerySets en Dictionaries siguiendo unos modelos. Adicional puede hacer validaciones antes de crear o actualizar una columna en la base de datos (También siguiendo unos modelos o campos personalizados)
+- **tests:** Pruebas unitarias
+- **urls:** Define que vista llamar dependiendo del match que hace con la URL.
+- **views:** Encargado de resolver cada acción del request (GET, PUT, POST, DELETE, etc), se encarga de entender un request y de orquestar las demas clases para poder armar un response
+
+### Adicionales
+Al momento de realizar la prueba el campo de state no existia en la base de datos, asi que todo lo referente a este campo en la solución ha sido documentado.
 
 ## Segundo punto (Set Favorite on property)
 Adicional, se deja documentado la posible solución del segundo punto de esta prueba tecnica y se adjunta la documentación explicando la solución implementada.
@@ -71,11 +84,54 @@ Las librerias que se utilizan son las siguientes:
 
 ## Requerimientos
 Para poder hacer el despliegue de este repositorio, el ambiente local debe tener como minimo las siguientes dependencias:
-- Python v3.7.6
-- virtualenv v20.0.18 [Guia de instalacion](https://pypi.org/project/virtualenv/)
+- Python v3.7.6 [Windows](https://www.python.org/downloads/) [Linux](https://docs.python-guide.org/starting/install3/linux/)
+- virtualenv v20.0.18 [Guia de instalación](https://pypi.org/project/virtualenv/)
+- Git [Windows](https://git-scm.com/downloads) [Linux](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ## Instalación
+Con los requerimientos ya instalados lo primero es proceder a clonar el repositorio. Para esto ejecutar el siguiente comando
+```
+git clone https://github.com/shirux/habiAPI
+```
 
-pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org <package_name>
+Una vez se clone el repositorio, nos ubicamos dentro del nuevo directorio para proseguir con los siguientes pasos de la instalación.
+Se debe ahora instalar un ambiente virtual en el cual se instalaran las dependencias del proyecto.
+Para esto ejecutamos el siguiente comando (Se sugiere mantener el nombre del ambiente virtual por temas de versionamiento)
+```
+virtualenv venv
+```
+
+Para activar el ambiente virtual, ejecutamos el siguiente comando:
+```
+venv/Scripts/Activate
+```
+
+Si está en windows(GitBash) puede usar el siguiente comando:
+```
+source venv/Scripts/Activate
+```
+
+Una vez activado el ambiente virtual, se procede a instalar las dependencias, para esto ejecute el siguiente comando (Este ignora cualquier advertencia de SSL):
+```
+pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
+```
+
+Procedemos a hacer la configuración del ambiente. 
+En el repositorio se deja un archivo de variables de entorno con ejemplos (.env-example). Copielo, peguelo y cambiele el nombre a .env
+Dentro del nuevo archivo deje las configuraciones necesarias para el correcto funcionamiento del aplicativo. (No omita ninguna variable, asi existan algunas por defecto).
+
+Con los pasos anteriores ya ejecutados se puede dar la inicialización del servidor. Para esto ejecute el siguiente comando:
+```
+python manage.py runserver
+```
+
+Este útlimo dara ejecución al servidor y se puede acceder por la siguiente url (Por defecto, si tiene otra configuración de inicialización, omita esta información):
+```
+http://127.0.0.1:8000
+```
+
+## Adicionales
 
 ## Dudas
+
+
