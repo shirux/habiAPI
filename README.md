@@ -67,8 +67,27 @@ Se explica la responsabilidad de cada archivo en la solución propuesta (Cabe re
 Al momento de realizar la prueba el campo de state no existia en la base de datos, asi que todo lo referente a este campo en la solución ha sido documentado.
 
 ## Segundo punto (Set Favorite on property)
-Adicional, se deja documentado la posible solución del segundo punto de esta prueba tecnica y se adjunta la documentación explicando la solución implementada.
-Finalmente, un último documento detalla las mejoras que se pueden implementar en la base de datos para optimizar las consultas y las posibles mejoras a futuro en el aplicativo.
+
+### Descripcion
+El usuario es capaz de seleccionar una propiedad con un favorito, y esta debe registrarse en la base de datos, registrando el historico de favoritos del usuario.
+
+### Solución
+Para la solución de este segundo requerimiento se adjunta el código (Pseudocodigo documentado en su mayoria).
+En este se puede encontrar el siguiente endpoint (donde id es el identificador de la propiedad):
+```
+PUT /api/properties/favorites/:id
+```
+
+Este endpoint maneja diferentes excepciones, como las siguientes:
+- No se provee un auth token o este caduco (403 Forbidden)
+- La propiedad no existe (404 Not Found)
+- Falta de conexión a BD (500 Server Error)
+- Error transaccional hacia la BD (500 Server Error)
+
+Al igual que el primer punto, cuenta con las mismas capas y mismas responsabilidades. Se mantiene el orden y se manejan los estandares para las respuestas por parte del servidor.
+
+### Adicional
+Adjunto al codigo encontrará unos documentos detallando el modelo propuesto para la solución del segundo punto, asi como una pequeña propuesta en la arquitectura para manejar tanto la parte transaccional (Que propiedades son favoritas de que usuario, teniendo fecha de registro de la acción), asi como el historico de cada acción de seleccionar/deseleccionar la propiedad como favorito.
 
 ## Detalle Técnico
 Esta prueba se encuentra desarrollada en el siguiente lenguaje:
@@ -131,6 +150,7 @@ http://127.0.0.1:8000
 ```
 
 ## Adicionales
+Adjunto en el repositorio se puede encontrar un documento en el cual se hacen varias propuestas para la optimización en la base de datos, así como otras propuestas a nivel de arquitectura para conseguir este objetivo.
 
 ## Dudas
 

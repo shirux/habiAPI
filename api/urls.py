@@ -1,15 +1,10 @@
-from django.http import JsonResponse
 from django.urls import path
 from django.conf.urls import url
 from django.urls import include
-from rest_framework import status
-
-# 404
-def error404(request, path=""):
-    return JsonResponse({"Error": "The resource was not found"}, status=status.HTTP_400_BAD_REQUEST)
+from standards.responses import StandardResponse
 
 urlpatterns = [
-    url(r"^$", error404),
-    path("api/properties", include("properties.urls")),
-    url(r"^(?P<path>.*)/$", error404),
+    url(r"^$", StandardResponse.not_found),
+    path("api/properties/", include("properties.urls")),
+    url(r"^(?P<path>.*)/$", StandardResponse.not_found),
 ]
