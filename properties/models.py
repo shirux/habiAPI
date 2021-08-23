@@ -2,7 +2,7 @@
 # from django.utils import timezone
 
 
-# class Favorite(models.Model):
+# class Likes(models.Model):
 #     id = models.AutoField(primary_key=True)
 #     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 #     property = models.ForeignKey(Property, on_delete=models.DO_NOTHING)

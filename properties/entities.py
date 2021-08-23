@@ -1,7 +1,7 @@
 from utils.mysql_utils import Database
 from django.conf import settings
 from properties.serializers import PropertySerializer
-# from properties.serializers import FavoriteSerializer
+# from properties.serializers import LikeSerializer
 
 database = Database(
     host=settings.DATABASES['default']['HOST'],
@@ -59,11 +59,11 @@ class PropertyEntity:
         except Exception:
             raise
 
-# class FavoriteEntity:
+# class LikeEntity:
 
 #     @staticmethod
-#     def set_property_favorite(user, property_id):
-#         """Create or remove a favorite property from a user
+#     def set_like_property(user, property_id):
+#         """Like or Unlike a property from a user
         
 #         Args:
 #             user (User): City name to filter.
@@ -73,23 +73,58 @@ class PropertyEntity:
 
 #             # We append the respective query on database
 #             # query = f"""
-#             # SELECT * FROM favorites 
+#             # SELECT * FROM Likes 
 #             # WHERE user_id = {user.pk}
 #             # AND property_id = {property_id}
 #             # """
 
 #             # This one is done via ORM
-#             favorite = Favorite.objects.filter(property=property_id, user=user.pk).first()
+#             like = Like.objects.filter(property=property_id, user=user.pk).first()
 
-#             # If relationship exists, then user is removing one favorite
-#             if favorite:
-#                 favorite.detele()
-#             # Otherwise, user selects a new property as favorite
+#             # If relationship exists, then user is removing one like
+#             if like:
+#                 like.detele()
+#                 This part can be done by serializer, but its complexity increase
+#                 property = like.property
+#                 if property.likes > 0:
+#                    property.likes -= 1
+#                    property.save()
+
+#                    SQL REMOVE ONE LIKE
+                    #  query = f"""
+                    #  UPDATE property 
+                    #  SET likes = likes - 1 
+                    #  WHERE id = {property_id}
+                    #  AND likes > 0
+                    #  """
+
+#                    SQL REMOVE RELATIONSHIP
+                    #  query = f"""
+                    #  DELETE FROM likes 
+                    #  WHERE property_id = {property_id}
+                    #  AND user_id = {user.pk}
+                    #  """
+
+
+#             # Otherwise, user gives a like to a property
 #             else:
 #                 context = {"user": user}
-#                 serializer = FavoriteSerializer(data={}, context=context, many=False)
+#                 serializer = LikeSerializer(data={}, context=context, many=False)
 #                 if serializer.is_valid(raise_exception=True):
 #                     serializer.save()
+
+#                   # SQL ADD ONE LIKE
+                    #  query = f"""
+                    #  UPDATE property 
+                    #  SET likes = likes + 1 
+                    #  WHERE id = {property_id}
+                    #  """
+
+                    # SQL ADD LIKE RELATIONSHIP
+                    # query = f"""
+                    # INSERT INTO likes (user_id, property_id)
+                    # values ({user.pk}, {property_id})
+                    # """ 
 
 #         except Exception:
 #             raise

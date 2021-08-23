@@ -1,0 +1,764 @@
+{
+	"info": {
+		"_postman_id": "c7ff8a1f-2bf5-45b4-8d22-f99cc0430275",
+		"name": "API Habi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retrieve a list of properties",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/properties/?city=Bogota&min_year=2010",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"properties",
+						""
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Bogota",
+							"description": "(Optional) City to filter"
+						},
+						{
+							"key": "state",
+							"value": "Bogota",
+							"description": "(Optional) State to filter",
+							"disabled": true
+						},
+						{
+							"key": "min_year",
+							"value": "2000",
+							"description": "(Optional) Minimum year to filter",
+							"disabled": true
+						},
+						{
+							"key": "max_year",
+							"value": "2010",
+							"description": "(Optional) Maximum year to filter",
+							"disabled": true
+						},
+						{
+							"key": "min_year",
+							"value": "2010"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK (No filters)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/properties/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"properties",
+								""
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Bogota",
+									"description": "(Optional) City to filter",
+									"disabled": true
+								},
+								{
+									"key": "state",
+									"value": "Bogota",
+									"description": "(Optional) State to filter",
+									"disabled": true
+								},
+								{
+									"key": "min_year",
+									"value": "2010",
+									"description": "(Optional) Minimum year to filter",
+									"disabled": true
+								},
+								{
+									"key": "max_year",
+									"value": "1900",
+									"description": "(Optional) Maximum year to filter",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 22 Aug 2021 03:09:43 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "738"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"bogota\",\n            \"price\": 350000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"medellin\",\n            \"price\": 325000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\"\n        },\n        {\n            \"address\": \"calle 23 #45-67\",\n            \"city\": \"bogota\",\n            \"price\": 120000000,\n            \"description\": \"Hermoso apartamento en el centro de la ciudad\"\n        },\n        {\n            \"address\": \"calle 23 #45-67\",\n            \"city\": \"medellin\",\n            \"price\": 210000000,\n            \"description\": \"\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"barranquilla\",\n            \"price\": 35000000\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"bogota\",\n            \"price\": 270000000,\n            \"description\": \"Apartamento con hermosas vistas\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"medellin\",\n            \"price\": 270000000,\n            \"description\": \"\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "200 OK (Some filters)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/properties/?city=Bogota&min_year=2010",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"properties",
+								""
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Bogota",
+									"description": "(Optional) City to filter"
+								},
+								{
+									"key": "state",
+									"value": "Bogota",
+									"description": "(Optional) State to filter",
+									"disabled": true
+								},
+								{
+									"key": "min_year",
+									"value": "2010",
+									"description": "(Optional) Minimum year to filter"
+								},
+								{
+									"key": "max_year",
+									"value": "1900",
+									"description": "(Optional) Maximum year to filter",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 22 Aug 2021 03:39:39 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "247"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"bogota\",\n            \"price\": 350000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"bogota\",\n            \"price\": 270000000,\n            \"description\": \"Apartamento con hermosas vistas\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "200 OK (All filters)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/properties/?city=Bogota&state=Bogota&min_year=1900&max_year=2010",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"properties",
+								""
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Bogota",
+									"description": "(Optional) City to filter"
+								},
+								{
+									"key": "state",
+									"value": "Bogota",
+									"description": "(Optional) State to filter"
+								},
+								{
+									"key": "min_year",
+									"value": "1900",
+									"description": "(Optional) Minimum year to filter"
+								},
+								{
+									"key": "max_year",
+									"value": "2010",
+									"description": "(Optional) Maximum year to filter"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 22 Aug 2021 03:40:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"address\": \"calle 23 #45-67\",\n            \"city\": \"bogota\",\n            \"price\": 120000000,\n            \"description\": \"Hermoso apartamento en el centro de la ciudad\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "500 Server Error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/properties/?city=Bogota&state=Bogota&min_year=1900&max_year=2010",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"properties",
+								""
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Bogota",
+									"description": "(Optional) City to filter"
+								},
+								{
+									"key": "state",
+									"value": "Bogota",
+									"description": "(Optional) State to filter"
+								},
+								{
+									"key": "min_year",
+									"value": "1900",
+									"description": "(Optional) Minimum year to filter"
+								},
+								{
+									"key": "max_year",
+									"value": "2010",
+									"description": "(Optional) Maximum year to filter"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 22 Aug 2021 03:40:36 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "63"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Sorry, We could not process your request. Try later\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Like property",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Token here",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/properties/likes/:id/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"properties",
+						"likes",
+						":id",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "(Required) Property ID"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "204 No Content",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/properties/likes/:id/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"properties",
+								"likes",
+								":id",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "(Required) Property ID"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 23 Aug 2021 04:19:26 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "PUT, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "403 Forbidden",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/properties/likes/:id/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"properties",
+								"likes",
+								":id",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "(Required) Property ID"
+								}
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 23 Aug 2021 04:20:11 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "PUT, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "58"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": \"Authentication credentials were not provided.\"\n}"
+				},
+				{
+					"name": "404 Not Found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/properties/likes/:id/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"properties",
+								"likes",
+								":id",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "(Required) Property ID"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 23 Aug 2021 04:21:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "PUT, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "31"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Property not found.\"\n}"
+				},
+				{
+					"name": "500 Server Error",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/properties/likes/:id/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"properties",
+								"likes",
+								":id",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "(Required) Property ID"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 23 Aug 2021 04:21:25 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "PUT, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "63"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Sorry, We could not process your request. Try later\"\n}"
+				}
+			]
+		}
+	]
+}
