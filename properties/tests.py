@@ -135,7 +135,7 @@ class PropertyTest(SimpleTestCase):
         url = reverse("properties")
         request_factory = APIRequestFactory()
         valid_years = [2002, 2011, 2015]
-
+        
         # Check array of valid years
         for year in valid_years:
 
@@ -149,6 +149,48 @@ class PropertyTest(SimpleTestCase):
             self.assertEqual(response_with_filter.status_code, status.HTTP_200_OK)
             self.assertGreater(len(response_with_filter.data["data"]), 0)
             self.assertGreater(len(response.data["data"]), len(response_with_filter.data["data"]))
+
+    def test_api_properties_get_filters(self):
+        """Test properties GET API endpoint all filters filter.
+        All filters are applied.
+
+        Must assert the next conditions:
+            - Both responses have 200 OK status
+            - Filter response must have more than or 0 results
+            - Filter response must have less or the same amount of results than no filter response
+        """
+
+        # Setup
+        url = reverse("properties")
+        request_factory = APIRequestFactory()
+        valid_cities = ["Bogota", "Medellin", "Barranquilla"]
+        valid_states = ["Bogota", "Atlantico", "Antioquia"]
+        valid_min_years = [2002, 2011]
+        valid_max_years = [2011, 2015]
+        iteration = 10
+        
+        # Check array of valid years
+        while iteration >= 0:
+
+            # Request section
+            data = {
+                "city": random.choice(valid_cities),
+                "state": random.choice(valid_states),
+                "min_year": random.choice(valid_min_years),
+                "max_year": random.choice(valid_max_years)
+            }
+            request = request_factory.get(url, None, format="json")
+            response = PropertiesApi.as_view()(request)
+            request = request_factory.get(url, data, format="json")
+            response_with_filter = PropertiesApi.as_view()(request)
+
+            # Assert with trending category
+            self.assertEqual(response_with_filter.status_code, status.HTTP_200_OK)
+            self.assertTrue(len(response_with_filter.data["data"]) >= 0)
+            self.assertTrue(len(response.data["data"]) >= len(response_with_filter.data["data"]))
+
+            # Iterate
+            iteration -= 1
 
     def test_api_properties_get_random_filter(self):
         """Test properties GET API endpoint invalid filters.
