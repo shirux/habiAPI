@@ -1,9 +1,9 @@
 from properties.entities import PropertyEntity
 from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import permissions
 from standards.responses import StandardResponse
 from utils.request_utils import RequestUtils
+# from properties.entities import FavoriteEntity
 
 # Create your views here.
 class PropertiesApi(APIView):
@@ -39,4 +39,25 @@ class PropertiesApi(APIView):
         except Exception:
             return self.response.send_500()
 
-    
+
+# class FavoritesApi(APIView):
+#     permission_classes = (permissions.IsAuthenticated,)
+#     response = StandardResponse
+
+#     def put(self, request, property_id):
+#         """PUT endpoint
+#         Toggle|Untoggle a property as favorite from an user
+
+#         Args:
+#             request (HttpRequest): Request sent by user|FrontEnd
+#             property_id (int): Property ID
+
+#         Returns:
+#             HttpResponse: Bodyless response
+#         """
+#         user = self.request.user
+#         try:
+#             EntityFavorite.set(user, property_id)
+#             return self.response.send_204()
+#         except Exception:
+#             return self.response.send_500()

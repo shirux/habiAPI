@@ -1,6 +1,7 @@
 from utils.mysql_utils import Database
 from django.conf import settings
 from properties.serializers import PropertySerializer
+# from properties.serializers import FavoriteSerializer
 
 database = Database(
     host=settings.DATABASES['default']['HOST'],
@@ -34,7 +35,7 @@ class PropertyEntity:
         
         try:
             query = """
-                SELECT C.address, C.city, C.price, C.description from status_history A
+                SELECT C.address, C.city, C.price, C.description FROM status_history A
                 JOIN status B ON B.id = A.status_id
                 JOIN property C ON C.id = A.property_id
                 WHERE (A.property_id, A.update_date) IN (select  property_id, max(update_date) AS update_date from status_history GROUP BY property_id)
@@ -57,3 +58,38 @@ class PropertyEntity:
             return serializer.data
         except Exception:
             raise
+
+# class FavoriteEntity:
+
+#     @staticmethod
+#     def set_property_favorite(user, property_id):
+#         """Create or remove a favorite property from a user
+        
+#         Args:
+#             user (User): City name to filter.
+#             property_id (int): Property Id.
+#         """
+#         try:
+
+#             # We append the respective query on database
+#             # query = f"""
+#             # SELECT * FROM favorites 
+#             # WHERE user_id = {user.pk}
+#             # AND property_id = {property_id}
+#             # """
+
+#             # This one is done via ORM
+#             favorite = Favorite.objects.filter(property=property_id, user=user.pk).first()
+
+#             # If relationship exists, then user is removing one favorite
+#             if favorite:
+#                 favorite.detele()
+#             # Otherwise, user selects a new property as favorite
+#             else:
+#                 context = {"user": user}
+#                 serializer = FavoriteSerializer(data={}, context=context, many=False)
+#                 if serializer.is_valid(raise_exception=True):
+#                     serializer.save()
+
+#         except Exception:
+#             raise
