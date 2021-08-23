@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from standards.responses import StandardResponse
 from utils.request_utils import RequestUtils
-# from properties.entities import FavoriteEntity
+# from properties.entities import LikeEntity
 
 # Create your views here.
 class PropertiesApi(APIView):
@@ -40,13 +40,14 @@ class PropertiesApi(APIView):
             return self.response.send_500()
 
 
-# class FavoritesApi(APIView):
+# class LikesApi(APIView):
 #     permission_classes = (permissions.IsAuthenticated,)
 #     response = StandardResponse
 
 #     def put(self, request, property_id):
 #         """PUT endpoint
-#         Toggle|Untoggle a property as favorite from an user
+#         Like| Unlike a property selected by a user.
+#         Increase number of likes on property
 
 #         Args:
 #             request (HttpRequest): Request sent by user|FrontEnd
@@ -57,7 +58,7 @@ class PropertiesApi(APIView):
 #         """
 #         user = self.request.user
 #         try:
-#             EntityFavorite.set(user, property_id)
+#             LikeEntity.set(user, property_id)
 #             return self.response.send_204()
 #         except Exception:
 #             return self.response.send_500()

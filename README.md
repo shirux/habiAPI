@@ -66,16 +66,16 @@ Se explica la responsabilidad de cada archivo en la solución propuesta (Cabe re
 ### Adicionales
 Al momento de realizar la prueba el campo de state no existia en la base de datos, asi que todo lo referente a este campo en la solución ha sido documentado.
 
-## Segundo punto (Set Favorite on property)
+## Segundo punto (Give Like on property)
 
 ### Descripcion
-El usuario es capaz de seleccionar una propiedad con un favorito, y esta debe registrarse en la base de datos, registrando el historico de favoritos del usuario.
+El usuario es capaz de darle Like a una propiedad, y esta debe registrarse en la base de datos.
 
 ### Solución
 Para la solución de este segundo requerimiento se adjunta el código (Pseudocodigo documentado en su mayoria).
 En este se puede encontrar el siguiente endpoint (donde id es el identificador de la propiedad):
 ```
-PUT /api/properties/favorites/:id
+PUT /api/properties/likes/:id
 ```
 
 Este endpoint maneja diferentes excepciones, como las siguientes:
@@ -86,14 +86,10 @@ Este endpoint maneja diferentes excepciones, como las siguientes:
 
 Al igual que el primer punto, cuenta con las mismas capas y mismas responsabilidades. Se mantiene el orden y se manejan los estandares para las respuestas por parte del servidor.
 
-### Adicional
+### Adicionales
 Para la parte de las respuestas se maneja un serializador NoNullSerializer (Serializador que utiliza el metodo ***to_representation*** para remover todos los valores que son NULOS y no enviar estos como respuesta). Personalmente no me gusta enviar valores nulos (pero si vacios) en los request y responses y siento que es muy mala practica hacer esto.
 
-En el repositorio encontará un archivo JSON de postman, en el cual se detallan los dos endpoints implementados con sus respectivos ejemplos y escenarios. En ellos puede encontrar que parametros se usan, ya sea URL parameters o query parameters. También se puede visualizar si utilizan o no un BODY, que respuesta deben generar en cada escenario y si deben o no llevar autenticación.
-
 Dentro del repositorio encontrará unos documentos detallando el modelo propuesto para la solución del segundo punto, asi como una pequeña propuesta en la arquitectura para manejar tanto la parte transaccional (Que propiedades son favoritas de que usuario, teniendo fecha de registro de la acción), asi como el historico de cada acción de seleccionar/deseleccionar la propiedad como favorito.
-
-Finalmente, en el repositorio encontrará un archivo documentando la estructura que se debe implementar en el front para poder realizar los llamados (Un pequeño Backup si el postman no logra importar los ejemplos), con el objetivo de tener una clara comunicación con el posible equipo de trabajo
 
 ## Detalle Técnico
 Esta prueba se encuentra desarrollada en el siguiente lenguaje:
@@ -157,6 +153,10 @@ http://127.0.0.1:8000
 
 ## Adicionales
 Adjunto en el repositorio se puede encontrar un documento en el cual se hacen varias propuestas para la optimización en la base de datos, así como otras propuestas a nivel de arquitectura para conseguir este objetivo.
+
+En el repositorio encontará un archivo JSON de postman, en el cual se detallan los dos endpoints implementados con sus respectivos ejemplos y escenarios. En ellos puede encontrar que parametros se usan, ya sea URL parameters o query parameters. También se puede visualizar si utilizan o no un BODY, que respuesta deben generar en cada escenario y si deben o no llevar autenticación.
+
+Finalmente, en el repositorio encontrará un archivo documentando la estructura que se debe implementar en el front para poder realizar los llamados (Un pequeño Backup si el postman no logra importar los ejemplos), con el objetivo de tener una clara comunicación con el posible equipo de trabajo
 
 ## Dudas
 

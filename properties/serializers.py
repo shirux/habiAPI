@@ -1,6 +1,6 @@
 from standards.serializers import NoNullSerializer
 from rest_framework import serializers
-# from properties.models import Favorite
+# from properties.models import Like
 
 class PropertySerializer(NoNullSerializer):
    """Serializer representing the property model"""
@@ -10,16 +10,20 @@ class PropertySerializer(NoNullSerializer):
    price = serializers.IntegerField(min_value=0, allow_null=False)
    description = serializers.CharField(trim_whitespace=True, allow_blank=True, allow_null=True)
 
-# class FavoriteSerializer(NoNullSerializer):
-#    """Serializer representing the favorite properties relationship model"""
+# class LikeSerializer(NoNullSerializer):
+#    """Serializer representing the like properties relationship model"""
 #    property = PropertySerializer(many=False, read_only=True)
 
 #    def create(self, validated_data):
 #         """
-#         Create a new favorite property for a user
+#         Create a new like property for a user
 #         """
 #         try:
 #             user = self.context["user"]
-#             return Favorite.objects.create(property=validated_data.get("property"), user=user)
+
+#             # Increase likes on related property             
+#             property.likes += 1
+#             property.save()
+#             return Like.objects.create(property=property, user=user)
 #         except Exception:
 #             raise
